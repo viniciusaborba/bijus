@@ -4,6 +4,7 @@ import cookie from "@fastify/cookie";
 import { env } from "./env";
 import { userRoutes } from "./http/controllers/users/routes";
 import { categoriesRoutes } from "./http/controllers/categories/routes";
+import cors from "@fastify/cors";
 
 export const app = fastify();
 
@@ -18,6 +19,9 @@ app.register(fastifyJwt, {
   },
 });
 
+app.register(cors, {
+  origin: "*",
+});
 app.register(cookie);
 app.register(userRoutes);
 app.register(categoriesRoutes);

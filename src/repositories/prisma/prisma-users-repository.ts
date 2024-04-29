@@ -4,6 +4,15 @@ import { prisma } from "../../lib/prisma";
 import { normalizeCPF } from "../../utils/normalize-cpf";
 
 export class PrismaUsersRepository implements UsersRepository {
+  async findById(id: string) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return user;
+  }
   async findByEmail(email: string) {
     const user = await prisma.user.findUnique({
       where: {

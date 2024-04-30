@@ -33,6 +33,14 @@ export class PrismaUsersRepository implements UsersRepository {
     return user;
   }
 
+  async unregister(id: string) {
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
+
   async create(data: Prisma.UserCreateInput) {
     const user = await prisma.user.create({
       data,

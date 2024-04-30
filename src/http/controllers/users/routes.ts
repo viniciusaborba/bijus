@@ -3,10 +3,12 @@ import { register } from "./register";
 import { authenticate } from "./authenticate";
 import { refresh } from "./refresh";
 import { read } from "./read";
+import { unregister } from "./unregister";
 
 export async function userRoutes(app: FastifyInstance) {
   app.post("/users", register);
   app.post("/sessions", authenticate);
   app.patch("/token/refresh", refresh);
   app.get("/users/:userId", read);
+  app.delete("/users/:userId", unregister);
 }

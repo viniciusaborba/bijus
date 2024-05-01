@@ -7,17 +7,15 @@ export async function register(req: FastifyRequest, res: FastifyReply) {
   const registerBodySchema = z.object({
     name: z.string(),
     imageUrl: z.string(),
-    slug: z.string().optional(),
   });
 
-  const { name, imageUrl, slug } = registerBodySchema.parse(req.body);
+  const { name, imageUrl } = registerBodySchema.parse(req.body);
 
   const registerUseCase = makeRegisterCategoryUseCase();
 
   const result = await registerUseCase.execute({
     name,
     imageUrl,
-    slug,
   });
 
   if (result.isLeft()) {

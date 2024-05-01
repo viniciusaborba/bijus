@@ -1,7 +1,7 @@
 import { Category } from "@prisma/client";
-import { CategoriesRepository } from "../../../repositories/categories-repository";
-import { Either, left, right } from "../../../@types/either";
-import { NotFoundError } from "../../../errors/not-found-error";
+import { CategoriesRepository } from "../../repositories/categories-repository";
+import { Either, left, right } from "../../@types/either";
+import { NotFoundError } from "../../errors/not-found-error";
 
 interface SearchManyCategoriesRequest {
   q: string;

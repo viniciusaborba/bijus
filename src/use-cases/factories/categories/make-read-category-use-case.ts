@@ -1,9 +1,9 @@
 import { PrismaCategoriesRepository } from "../../../repositories/prisma/prisma-categories-repository";
-import { SearchManyCategories } from "../../categories/search-many";
+import { ReadCategory } from "../../categories/read";
 
-export function makeSearchManyCategoriesUserUseCase() {
+export function makeReadCategoryUseCase() {
   const prismaCategoriesRepository = new PrismaCategoriesRepository();
-  const useCase = new SearchManyCategories(prismaCategoriesRepository);
+  const useCase = new ReadCategory(prismaCategoriesRepository);
 
   return useCase;
 }

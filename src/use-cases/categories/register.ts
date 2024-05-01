@@ -6,7 +6,6 @@ import { formatToSlug } from "../../utils/format-to-slug";
 
 interface RegisterCategoryRequest {
   name: string;
-  slug?: string;
   imageUrl: string;
 }
 
@@ -21,7 +20,6 @@ export class RegisterCategory {
 
   async execute({
     name,
-    slug,
     imageUrl,
   }: RegisterCategoryRequest): Promise<RegisterCategoryResponse> {
     const categoryAlreadyExists = await this.categoriesRepository.findByName(

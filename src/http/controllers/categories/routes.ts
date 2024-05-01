@@ -3,6 +3,7 @@ import { register } from "./register";
 import { verifyUserRole } from "../../middlewares/verify-user-role";
 import { unregister } from "./unregister";
 import { search } from "./search-many";
+import { read } from "./read";
 
 export async function categoriesRoutes(app: FastifyInstance) {
   app.post("/categories", { onRequest: [verifyUserRole("ADMIN")] }, register);
@@ -12,4 +13,5 @@ export async function categoriesRoutes(app: FastifyInstance) {
     unregister
   );
   app.get("/categories/search", search);
+  app.get("/categories/:categoryId/read", read);
 }

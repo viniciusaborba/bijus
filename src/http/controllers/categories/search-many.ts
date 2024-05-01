@@ -5,16 +5,16 @@ import { NotFoundError } from "../../../errors/not-found-error";
 import { ReadCategoryPresenter } from "../../../presenter/read-category-presenter";
 
 export async function search(req: FastifyRequest, res: FastifyReply) {
-  const searchRecipientsQuerySchema = z.object({
+  const searchCategoriesQuerySchema = z.object({
     q: z.string(),
     page: z.coerce.number().min(1).default(1),
   });
 
-  const { q, page } = searchRecipientsQuerySchema.parse(req.query);
+  const { q, page } = searchCategoriesQuerySchema.parse(req.query);
 
-  const searchRecipientsUseCase = makeSearchManyCategoriesUserUseCase();
+  const searchCategoriesUseCase = makeSearchManyCategoriesUserUseCase();
 
-  const result = await searchRecipientsUseCase.execute({
+  const result = await searchCategoriesUseCase.execute({
     q,
     page,
   });

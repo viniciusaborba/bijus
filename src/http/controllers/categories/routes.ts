@@ -4,6 +4,7 @@ import { verifyUserRole } from "../../middlewares/verify-user-role";
 import { unregister } from "./unregister";
 import { search } from "./search-many";
 import { read } from "./read";
+import { update } from "./update";
 
 export async function categoriesRoutes(app: FastifyInstance) {
   app.post("/categories", { onRequest: [verifyUserRole("ADMIN")] }, register);
@@ -14,4 +15,9 @@ export async function categoriesRoutes(app: FastifyInstance) {
   );
   app.get("/categories/search", search);
   app.get("/categories/:categoryId/read", read);
+  app.put(
+    "/categories/:categoryId/update",
+    { onRequest: verifyUserRole("ADMIN") },
+    update
+  );
 }

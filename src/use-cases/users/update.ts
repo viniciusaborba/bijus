@@ -1,7 +1,6 @@
 import { UsersRepository } from "../../repositories/users-repository";
 import { Either, left, right } from "../../@types/either";
 import { NotFoundError } from "../../errors/not-found-error";
-import { hash } from "bcryptjs";
 
 interface UpdateUserRequest {
   userId: string;

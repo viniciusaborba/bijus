@@ -36,6 +36,15 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     return category;
   }
 
+  async update(data: Prisma.CategoryUpdateInput, categoryId: string) {
+    await prisma.category.update({
+      where: {
+        id: categoryId,
+      },
+      data,
+    });
+  }
+
   async delete(id: string) {
     await prisma.category.delete({
       where: {

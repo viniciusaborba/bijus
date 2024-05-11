@@ -43,40 +43,32 @@ model Category {
 }
 
 model Product {
-  id                 String         @id @default(uuid())
+  id                 String   @id @default(uuid())
   name               String
   slug               String
   description        String
-  basePrice          Decimal        @db.Decimal(8, 2)
+  basePrice          Decimal  @db.Decimal(8, 2)
   imageUrls          String[]
   categoryId         String
-  category           Category       @relation(fields: [categoryId], references: [id])
-  discountPercentage Int            @default(0)
-  OrderProduct       OrderProduct[]
+  category           Category @relation(fields: [categoryId], references: [id])
+  discountPercentage Int      @default(0)
+  order              Order    @relation(fields: [orderId], references: [id])
+  orderId            String
 }
 
 model Order {
-  id            String         @id @default(uuid())
-  userId        String
-  user          User           @relation(fields: [userId], references: [id])
-  orderProducts OrderProduct[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @default(now()) @updatedAt
-  status        OrderStatus    @default(WAITING_FOR_PAYMENT)
+  id        String      @id @default(uuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now()) @updatedAt
+  status    OrderStatus @default(WAITING_FOR_PAYMENT)
+  quantity  Int
+  Products  Product[]
 }
 
 enum OrderStatus {
   WAITING_FOR_PAYMENT
   PAYMENT_CONFIRMED
   CANCELED
-}
-
-model OrderProduct {
-  id        String  @id @default(uuid())
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
-  orderId   String
-  order     Order   @relation(fields: [orderId], references: [id])
-  price     Decimal @db.Decimal(8, 2)
-  quantity  Int
 }

@@ -5,4 +5,5 @@ export interface ProductsRepository {
   delete(id: string): Promise<void>;
   findById(id: string): Promise<Product | null>;
   findByName(name: string): Promise<Product | null>;
+  listProductsBySlug(): Promise<Product[]>;
 }

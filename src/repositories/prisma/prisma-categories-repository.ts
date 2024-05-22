@@ -36,6 +36,19 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     return category;
   }
 
+  async listBySlug(slug: string) {
+    const category = await prisma.category.findFirst({
+      where: {
+        slug,
+      },
+      include: {
+        products: true,
+      },
+    });
+
+    return category;
+  }
+
   async list() {
     const categories = await prisma.category.findMany({});
 

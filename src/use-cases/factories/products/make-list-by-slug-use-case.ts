@@ -1,5 +1,5 @@
 import { PrismaProductsRepository } from "../../../repositories/prisma/prisma-products-repository";
-import { ListProductsBySlugUseCase } from "../../products/list-necklaces";
+import { ListProductsBySlugUseCase } from "../../products/list-products-by-slug";
 
 export function makeListProductsBySlugUseCase() {
   const prismaProductsRepository = new PrismaProductsRepository();

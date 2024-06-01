@@ -23,16 +23,26 @@ export class PrismaProductsRepository implements ProductsRepository {
     return product;
   }
 
-  async listProductsBySlug() {
-    const necklaces = await prisma.product.findMany({
+  async read(slug: string) {
+    const product = await prisma.product.findFirst({
+      where: {
+        slug,
+      },
+    });
+
+    return product;
+  }
+
+  async listProductsBySlug(slug: string) {
+    const products = await prisma.product.findMany({
       where: {
         category: {
-          slug: "colares",
+          slug,
         },
       },
     });
 
-    return necklaces;
+    return products;
   }
 
   async delete(id: string): Promise<void> {

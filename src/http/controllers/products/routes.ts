@@ -3,6 +3,7 @@ import { verifyUserRole } from "../../middlewares/verify-user-role";
 import { register } from "./create";
 import { Delete } from "./delete";
 import { listBySlug } from "./list-by-slug";
+import { read } from "./read";
 
 export async function productsRoutes(app: FastifyInstance) {
   app.post("/products", { onRequest: [verifyUserRole("ADMIN")] }, register);
@@ -11,5 +12,6 @@ export async function productsRoutes(app: FastifyInstance) {
     { onRequest: [verifyUserRole("ADMIN")] },
     Delete
   );
-  app.get("/products/list-by-slug", listBySlug);
+  app.get("/products/list-by-slug/:slug", listBySlug);
+  app.get("/products/:slug", read);
 }

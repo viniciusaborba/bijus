@@ -3,6 +3,18 @@ import { prisma } from "../../lib/prisma";
 import { Prisma } from "@prisma/client";
 
 export class PrismaProductsRepository implements ProductsRepository {
+  async findManyOffers() {
+    const offers = await prisma.product.findMany({
+      where: {
+        discountPercentage: {
+          gt: 0,
+        },
+      },
+    });
+
+    return offers;
+  }
+
   async findById(id: string) {
     const product = await prisma.product.findUnique({
       where: {
@@ -27,6 +39,19 @@ export class PrismaProductsRepository implements ProductsRepository {
     const product = await prisma.product.findFirst({
       where: {
         slug,
+      },
+      include: {
+        category: {
+          include: {
+            products: {
+              where: {
+                slug: {
+                  not: slug,
+                },
+              },
+            },
+          },
+        },
       },
     });
 

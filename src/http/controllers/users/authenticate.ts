@@ -61,6 +61,7 @@ export async function authenticate(req: FastifyRequest, res: FastifyReply) {
         token,
         user: user.role,
         name: user.name,
+        role: user.role,
       });
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {

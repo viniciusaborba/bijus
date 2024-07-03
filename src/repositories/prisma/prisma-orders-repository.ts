@@ -10,7 +10,7 @@ export class PrismaOrdersRepository implements OrdersRepository {
         orderProducts: {
           createMany: {
             data: products.map((product) => ({
-              productId: product.id,
+              productId: product.productId,
             })),
           },
         },

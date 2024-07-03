@@ -1,7 +1,7 @@
 import { Prisma, Order, Product } from "@prisma/client";
 
 export interface ProductProps {
-  id: string;
+  productId: string;
 }
 
 export interface OrdersRepositoryProps {

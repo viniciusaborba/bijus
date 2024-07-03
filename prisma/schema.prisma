@@ -66,19 +66,15 @@ model Order {
   status        OrderStatus    @default(WAITING_FOR_PAYMENT)
 }
 
-model OrderProduct {
-  id                 String  @id @default(uuid())
-  productId          String
-  product            Product @relation(fields: [productId], references: [id])
-  orderId            String
-  order              Order   @relation(fields: [orderId], references: [id])
-  basePrice          Decimal @db.Decimal(8, 2)
-  discountPercentage Int     @default(0)
-  quantity           Int
-}
-
 enum OrderStatus {
   WAITING_FOR_PAYMENT
   PAYMENT_CONFIRMED
-  CANCELED
+}
+
+model OrderProduct {
+  id        String  @id @default(uuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
 }

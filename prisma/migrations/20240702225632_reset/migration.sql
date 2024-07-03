@@ -36,7 +36,7 @@ CREATE TABLE "Product" (
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "basePrice" DECIMAL(8,2) NOT NULL,
+    "basePrice" INTEGER NOT NULL,
     "imageUrls" TEXT[],
     "categoryId" TEXT NOT NULL,
     "discountPercentage" INTEGER NOT NULL DEFAULT 0,
@@ -51,19 +51,9 @@ CREATE TABLE "Order" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" "OrderStatus" NOT NULL DEFAULT 'WAITING_FOR_PAYMENT',
+    "productId" TEXT NOT NULL,
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "OrderProduct" (
-    "id" TEXT NOT NULL,
-    "productId" TEXT NOT NULL,
-    "orderId" TEXT NOT NULL,
-    "price" DECIMAL(8,2) NOT NULL,
-    "quantity" INTEGER NOT NULL,
-
-    CONSTRAINT "OrderProduct_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -82,7 +72,4 @@ ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("cat
 ALTER TABLE "Order" ADD CONSTRAINT "Order_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "OrderProduct" ADD CONSTRAINT "OrderProduct_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "OrderProduct" ADD CONSTRAINT "OrderProduct_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Order" ADD CONSTRAINT "Order_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

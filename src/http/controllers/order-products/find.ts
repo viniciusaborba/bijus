@@ -1,7 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { AlreadyExistsError } from "../../../errors/already-exists-error";
-import { makeReadCategoryUseCase } from "../../../use-cases/factories/categories/make-read-category-use-case";
 import { NotFoundError } from "../../../errors/not-found-error";
 import { makeFindOrderProductUseCase } from "@/use-cases/factories/order-products/make-find-order-products";
 
@@ -10,7 +8,7 @@ export async function find(req: FastifyRequest, res: FastifyReply) {
     orderId: z.string(),
   });
 
-  const { orderId } = findOrderProductBodySchema.parse(req.body);
+  const { orderId } = findOrderProductBodySchema.parse(req.params);
 
   const findOrderProductUseCase = makeFindOrderProductUseCase();
 

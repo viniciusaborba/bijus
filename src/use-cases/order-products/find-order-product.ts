@@ -19,7 +19,7 @@ export class FindOrderProductUseCase {
   async execute({
     orderId,
   }: FindOrderProductRequest): Promise<FindOrderProductResponse> {
-    const orderProducts = await this.orderProductsRepository.find(orderId);
+    const orderProducts = await this.orderProductsRepository.findManyByOrderId(orderId);
 
     if (!orderProducts) {
       return left(new NotFoundError("order products"));

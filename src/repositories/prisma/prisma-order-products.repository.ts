@@ -5,7 +5,10 @@ export class PrismaOrderProductsRepository implements OrdersProductsRepository {
   async findManyByOrderId(orderId: string) {
     const orderProducts = await prisma.orderProduct.findMany({
       where: {
-        orderId
+        orderId,
+      },
+      include: {
+        product: true,
       },
     });
 

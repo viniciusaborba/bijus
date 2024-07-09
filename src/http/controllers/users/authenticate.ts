@@ -59,7 +59,7 @@ export async function authenticate(req: FastifyRequest, res: FastifyReply) {
       .status(200)
       .send({
         token,
-        user: user.role,
+        userId: user.id,
         name: user.name,
         role: user.role,
       });

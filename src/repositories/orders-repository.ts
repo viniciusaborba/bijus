@@ -1,7 +1,8 @@
-import { Prisma, Order, Product } from "@prisma/client";
+import { Order } from "@prisma/client";
 
 export interface ProductProps {
   productId: string;
+  quantity?: number;
 }
 
 export interface OrdersRepositoryProps {

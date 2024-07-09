@@ -11,6 +11,7 @@ export class PrismaOrdersRepository implements OrdersRepository {
           createMany: {
             data: products.map((product) => ({
               productId: product.productId,
+              quantity: product.quantity ? product.quantity : 0,
             })),
           },
         },
